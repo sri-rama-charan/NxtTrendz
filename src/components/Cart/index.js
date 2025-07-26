@@ -25,6 +25,7 @@ const Cart = () => (
                 <h1 className="cart-heading">My Cart</h1>
                 <div className="w-100 d-flex flex-row justify-content-end">
                   <button
+                    type="button"
                     onClick={removeAllCartItems}
                     className="remove-all-button"
                   >

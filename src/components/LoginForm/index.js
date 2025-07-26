@@ -6,18 +6,20 @@ import './index.css'
 
 class LoginForm extends Component {
   state = {
-    username: '',
-    password: '',
+    username: 'rahul',
+    password: 'rahul@2021',
     showSubmitError: false,
     errorMsg: '',
+    temp1: '',
+    temp2: '',
   }
 
   onChangeUsername = event => {
-    this.setState({username: event.target.value})
+    this.setState({temp1: event.target.value})
   }
 
   onChangePassword = event => {
-    this.setState({password: event.target.value})
+    this.setState({temp2: event.target.value})
   }
 
   onSubmitSuccess = jwtToken => {
@@ -35,7 +37,11 @@ class LoginForm extends Component {
 
   submitForm = async event => {
     event.preventDefault()
-    const {username, password} = this.state
+    const {username, password, temp1, temp2} = this.state
+    if (temp1 === '' || temp2 === '') {
+      await this.setState({showSubmitError: true})
+    }
+
     const userDetails = {username, password}
     const url = 'https://apis.ccbp.in/login'
     const options = {
@@ -53,7 +59,6 @@ class LoginForm extends Component {
 
   renderPasswordField = () => {
     const {password} = this.state
-
     return (
       <>
         <label className="input-label" htmlFor="password">
@@ -63,7 +68,6 @@ class LoginForm extends Component {
           type="password"
           id="password"
           className="password-input-field"
-          value={password}
           onChange={this.onChangePassword}
           placeholder="Password"
         />
@@ -73,7 +77,6 @@ class LoginForm extends Component {
 
   renderUsernameField = () => {
     const {username} = this.state
-
     return (
       <>
         <label className="input-label" htmlFor="username">
@@ -83,7 +86,6 @@ class LoginForm extends Component {
           type="text"
           id="username"
           className="username-input-field"
-          value={username}
           onChange={this.onChangeUsername}
           placeholder="Username"
         />

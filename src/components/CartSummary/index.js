@@ -17,7 +17,6 @@ const CartSummary = () => (
       }
 
       const orderTotal = () => {
-        const orderValue = 0
         const totalValueList = cartList.map(
           eachItem => eachItem.quantity * eachItem.price,
         )
